@@ -24,9 +24,6 @@ let createNewUser = async (data) => {
             reject(e)
         }
     })
-    console.log('data from services ',);
-    console.log(data);
-    console.log(hashPasswordFromCrypt);
 
 }
 
@@ -93,8 +90,15 @@ let updateUserData = (data) => {
 let deleteUserById = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
+            // await db.User.destroy({
+            //     where: { id: id },
+            //     raw: true
+            // })
+            // let allUser = await db.User.findAll()
+            // resolve(allUser)
             let user = await db.User.findOne({
-                where: { id: id }
+                where: { id: id },
+                raw: false
             })
             if (user) {
                 await user.destroy()
